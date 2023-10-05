@@ -4,7 +4,7 @@
   "description": "teste_websocket",
   "main": "index.js",
   "scripts": {
-    "dev": "",
+    "dev": "nodemon --watch src/ --exec ts-node src/index.ts -e ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
