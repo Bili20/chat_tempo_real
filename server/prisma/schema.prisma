@@ -7,27 +7,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Pessoa { 
-  id Int @id @default(autoincrement())
-  nome String
-  email String @unique
-  senha String
-  cpf String @unique
-  data_cadastro DateTime @default(now())
-
-  @@map(name: "pessoa")
+model conversa {
+  id               BigInt             @id(map: "conversa_pk") @default(autoincrement())
+  id_receptor      Int?
+  data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
+  id_pessoa        Int
+  id_grupo         Int?
+  grupo            grupo?             @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
+  pessoa           pessoa             @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+  mensagem_grupo   mensagem_grupo[]
+  mensagem_privada mensagem_privada[]
 }
 
-model Grupo {
-  id Int @id @default(autoincrement())
-  nome String
-  descricao String?
-
-  @@map(name: "grupo")
+model grupo {
+  id             Int              @id(map: "grupo_pk") @default(autoincrement())
+  nome           String           @default(dbgenerated("200")) @db.VarChar
+  descricao      String?
+  conversa       conversa[]
+  grupos_pessoas grupos_pessoas[]
 }
 
-model GruposPessoas{
-  id Int @id @default(autoincrement())
-  data_cadastro DateTime @default(now())
-  
+model grupos_pessoas {
+  id            Int      @id(map: "grupos_pessoas_pk") @default(autoincrement())
+  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
+  id_pessoa     Int
+  id_grupo      Int
+  grupo         grupo    @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
+  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+}
+
+model mensagem_grupo {
+  id            BigInt   @id(map: "mensagem_grupo_pk") @default(autoincrement())
+  mensagem      String
+  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
+  id_conversa   BigInt
+  id_pessoa     Int
+  conversa      conversa @relation(fields: [id_conversa], references: [id], map: "conversa_fk")
+  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+}
+
+model mensagem_privada {
+  id            BigInt   @id(map: "mensagem_privada_pk") @default(autoincrement())
+  mensagem      String
+  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
+  id_conversa   BigInt
+  id_pessoa     Int
+  conversa      conversa @relation(fields: [id_conversa], references: [id], map: "conversa_fk")
+  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+}
+
+model pessoa {
+  id               Int                @id(map: "pessoa_pk") @default(autoincrement())
+  nome             String             @default(dbgenerated("200")) @db.VarChar
+  email            String             @default(dbgenerated("255")) @db.VarChar
+  senha            String             @db.VarChar
+  cpf              String             @unique(map: "cpf_uq") @default(dbgenerated("11")) @db.VarChar
+  data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
+  conversa         conversa[]
+  grupos_pessoas   grupos_pessoas[]
+  mensagem_grupo   mensagem_grupo[]
+  mensagem_privada mensagem_privada[]
 }
