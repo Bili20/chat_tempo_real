@@ -27,6 +27,12 @@ export class PessoaController {
           id: true,
           nome: true,
           email: true,
+          grupos_pessoas: {
+            select: {
+              id: true,
+              grupo: true,
+            },
+          },
         },
       });
 
