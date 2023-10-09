@@ -19,4 +19,20 @@ export class PessoaController {
       res.status(500).json({ message: `${e} - falha ao cadastrar` });
     }
   }
+
+  static async findAllPessoa(req: Request, res: Response) {
+    try {
+      const pessoas = await prismaClient.pessoa.findMany({
+        select: {
+          id: true,
+          nome: true,
+          email: true,
+        },
+      });
+
+      res.status(200).json(pessoas);
+    } catch (e) {
+      res.status(500).json({ message: `${e} - falha na consulta` });
+    }
+  }
 }
