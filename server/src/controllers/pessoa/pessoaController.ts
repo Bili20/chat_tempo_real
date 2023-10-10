@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
-import { prismaClient } from "../config/prismaClient";
+import { prismaClient } from "../../config/prismaClient";
 import bcrypt from "bcrypt";
+import { IPessoa } from "./interfaces/interfacePessoa";
+
 export class PessoaController {
   static async createPessoa(req: Request, res: Response) {
     let { nome, email, senha, cpf } = req.body;
@@ -39,6 +41,33 @@ export class PessoaController {
       res.status(200).json(pessoas);
     } catch (e) {
       res.status(500).json({ message: `${e} - falha na consulta` });
+    }
+  }
+
+  static async findPessoaPorEmail(email: string): Promise<IPessoa | undefined> {
+    const pessoa = await prismaClient.pessoa.findUnique({
+      where: { email: email },
+    });
+    if (pessoa) {
+      const newPessoa = {} as IPessoa;
+      newPessoa.id = pessoa.id;
+      newPessoa.email = pessoa.email;
+      newPessoa.senha = pessoa.senha;
+      return newPessoa;
+    } else {
+      return;
+    }
+  }
+
+  static async findOnePessoa(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const pessoa = await prismaClient.pessoa.findUniqueOrThrow({
+        where: { id: Number(id) },
+      });
+      res.status(200).send({ id: pessoa.id, nome: pessoa.nome });
+    } catch (e) {
+      res.status(400).json({ message: "Erro, pessoa não encontrada" });
     }
   }
 }
