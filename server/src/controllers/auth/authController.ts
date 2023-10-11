@@ -23,7 +23,7 @@ export class AuthController {
               expiresIn: "7d",
             }
           );
-          res.status(200).json({ acess: token });
+          res.status(200).json({ access: token });
         } else {
           res.status(401).json({ message: "Email ou senha incorreto" });
         }

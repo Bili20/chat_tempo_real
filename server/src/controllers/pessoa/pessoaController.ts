@@ -2,11 +2,15 @@ import { Request, Response } from "express";
 import { prismaClient } from "../../config/prismaClient";
 import bcrypt from "bcrypt";
 import { IPessoa } from "./interfaces/interfacePessoa";
-
+import validator from "email-validator";
 export class PessoaController {
   static async createPessoa(req: Request, res: Response) {
     let { nome, email, senha, cpf } = req.body;
     try {
+      const emailValido = validator.validate(email);
+      if (!emailValido) {
+        throw new Error("Email invalido");
+      }
       senha = await bcrypt.hash(senha, 10);
       const pessoa = await prismaClient.pessoa.create({
         data: {
@@ -18,7 +22,7 @@ export class PessoaController {
       });
       res.status(201).json({ id: pessoa.id, nome: pessoa.nome });
     } catch (e) {
-      res.status(500).json({ message: `${e} - falha ao cadastrar` });
+      res.status(400).json({ message: `${e} - falha ao cadastrar` });
     }
   }
 
@@ -40,7 +44,7 @@ export class PessoaController {
 
       res.status(200).json(pessoas);
     } catch (e) {
-      res.status(500).json({ message: `${e} - falha na consulta` });
+      res.status(400).json({ message: `${e} - falha na consulta` });
     }
   }
 
