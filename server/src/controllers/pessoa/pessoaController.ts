@@ -48,11 +48,13 @@ export class PessoaController {
     const pessoa = await prismaClient.pessoa.findUnique({
       where: { email: email },
     });
+
     if (pessoa) {
       const newPessoa = {} as IPessoa;
       newPessoa.id = pessoa.id;
       newPessoa.email = pessoa.email;
       newPessoa.senha = pessoa.senha;
+      newPessoa.nome = pessoa.nome;
       return newPessoa;
     } else {
       return;
