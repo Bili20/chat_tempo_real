@@ -85,4 +85,23 @@ export class PessoaController {
       res.status(400).json({ messgae: `${e}` });
     }
   }
+
+  static async destroyPessoa(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      const pessoa = await prismaClient.pessoa.findUniqueOrThrow({
+        where: { id: Number(id) },
+      });
+
+      if (!pessoa) {
+        throw new Error("Pessoa não encontrada");
+      }
+
+      await prismaClient.pessoa.delete({ where: { id: pessoa.id } });
+      res.status(200).json();
+    } catch (e) {
+      res.status(400).json({ messgae: `${e}` });
+    }
+  }
 }

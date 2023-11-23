@@ -15,5 +15,10 @@ pessoaRoutes.patch(
   AuthController.verificaJWt,
   PessoaController.sendPessoaToGrupo
 );
+pessoaRoutes.delete(
+  "/pessoa/:id",
+  AuthController.verificaJWt,
+  PessoaController.destroyPessoa
+);
 
 export { pessoaRoutes };
