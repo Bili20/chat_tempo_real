@@ -7,7 +7,7 @@ const pessoaRoutes = express.Router();
 pessoaRoutes.post("/pessoa", PessoaController.createPessoa);
 pessoaRoutes.get(
   "/pessoa",
-  AuthController.verificaJWt,
+  //AuthController.verificaJWt,
   PessoaController.findAllPessoa
 );
 pessoaRoutes.patch(
