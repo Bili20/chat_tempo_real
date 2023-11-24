@@ -9,4 +9,10 @@ grupoRoutes.get(
   GrupoController.findAllGrupos
 );
 
+grupoRoutes.post(
+  "/grupo",
+  AuthController.verificaJWt,
+  GrupoController.createGrupo
+);
+
 export { grupoRoutes };

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../../config/prismaClient";
+import { IGrupoCadastro } from "./interfaces/interfaceGrupo";
 
 export class GrupoController {
   static async findOneGrupo(id: number) {
@@ -19,7 +20,18 @@ export class GrupoController {
       const grupo = await prismaClient.grupo.findMany();
       res.status(200).json(grupo);
     } catch (e) {
-      res.status(400).json({ messgae: `Erro ao buscar grupos` });
+      res.status(400).json({ message: `Erro ao buscar grupos` });
+    }
+  }
+
+  static async createGrupo(req: Request, res: Response) {
+    let IGrupoCadastro: IGrupoCadastro = req.body;
+
+    try {
+      await prismaClient.grupo.create({ data: IGrupoCadastro });
+      res.status(201).json();
+    } catch (e) {
+      res.status(400).json({ message: `Erro ao cadastrar: ${e}` });
     }
   }
 }
