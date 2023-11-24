@@ -2,25 +2,20 @@ import bcrypt from "bcrypt";
 import validator from "email-validator";
 import { Request, Response } from "express";
 import { prismaClient } from "../../config/prismaClient";
-import { IPessoa } from "./interfaces/interfacePessoa";
+import { IPessoa, IPessoaCadastro } from "./interfaces/interfacePessoa";
 import { GrupoController } from "../grupo/grupoController";
 import { GruposPessoasController } from "../gruposPessoas/gruposPessoasController";
 export class PessoaController {
   static async createPessoa(req: Request, res: Response) {
-    let { nome, email, senha, cpf } = req.body;
+    let IPessoaCadastro: IPessoaCadastro = req.body;
     try {
-      const emailValido = validator.validate(email);
+      const emailValido = validator.validate(IPessoaCadastro.email);
       if (!emailValido) {
         throw new Error("Email invalido");
       }
-      senha = await bcrypt.hash(senha, 10);
+      IPessoaCadastro.senha = await bcrypt.hash(IPessoaCadastro.senha, 10);
       const pessoa = await prismaClient.pessoa.create({
-        data: {
-          nome,
-          email,
-          senha,
-          cpf,
-        },
+        data: IPessoaCadastro,
       });
       res.status(201).json({ id: pessoa.id, nome: pessoa.nome });
     } catch (e) {
@@ -82,7 +77,11 @@ export class PessoaController {
       await GruposPessoasController.createGruposPessoas(pessoa.id, grupo.id);
       res.status(200).json();
     } catch (e) {
-      res.status(400).json({ messgae: `${e}` });
+      res
+        .status(400)
+        .json({
+          messgae: `Erro ao adicionar pessoa, verifique se ela já faz parte do grupo: ${e}`,
+        });
     }
   }
 
