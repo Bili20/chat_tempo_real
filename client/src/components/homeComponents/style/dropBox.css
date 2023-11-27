@@ -1,0 +1,37 @@
+.background-drop {
+  width: 300px;
+  height: 100%;
+  background-color: grey;
+  overflow-y: auto;
+}
+
+.nome-user {
+  color: rgb(0, 0, 0);
+  background-color: rgb(148, 152, 207);
+  font-weight: 300;
+}
+
+.grupos button {
+  background: rgb(41, 47, 133);
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+}
+
+.btn-grupos {
+  display: flex;
+}
+.conversa {
+  background-color: blueviolet;
+}
+.icone {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: left;
+}
+.grupos h2 {
+  color: black;
+  background-color: rgb(148, 152, 207);
+  padding: 0.1rem;
+}
