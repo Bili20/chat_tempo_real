@@ -12,12 +12,12 @@ pessoaRoutes.get(
 );
 pessoaRoutes.patch(
   "/pessoa/:idPessoa/envia/grupo/:idGrupo",
-  AuthController.verificaJWt,
+  //AuthController.verificaJWt,
   PessoaController.sendPessoaToGrupo
 );
 pessoaRoutes.delete(
   "/pessoa/:id",
-  AuthController.verificaJWt,
+  //AuthController.verificaJWt,
   PessoaController.destroyPessoa
 );
 
