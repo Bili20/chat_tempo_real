@@ -5,13 +5,13 @@ const grupoRoutes = express.Router();
 
 grupoRoutes.get(
   "/grupo",
-  AuthController.verificaJWt,
+  //AuthController.verificaJWt,
   GrupoController.findAllGrupos
 );
 
 grupoRoutes.post(
   "/grupo",
-  AuthController.verificaJWt,
+  //AuthController.verificaJWt,
   GrupoController.createGrupo
 );
 
