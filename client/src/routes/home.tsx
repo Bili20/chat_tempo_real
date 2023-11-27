@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { URL } from "../constants/constants";
 import "../components/homeComponents/style/dropBox.css";
 import DropDown from "../components/homeComponents/dropBox";
+import ModalMenssagem from "../components/homeComponents/modalMenssagem";
 
 export type pessoas = {
   email: string;
@@ -29,6 +30,12 @@ type grupos = {
 const Home = () => {
   const [users, setUser] = useState<pessoas[]>([]);
   const [grupos, setGrupo] = useState<grupos[]>([]);
+  const [menssagemBox, setMenssagemBox] = useState({
+    isOpen: false,
+    infoUser: {
+      nome: "",
+    },
+  });
 
   const getUsers = async () => {
     try {
@@ -62,11 +69,24 @@ const Home = () => {
   return (
     <>
       <NavBar />
+      {menssagemBox ? (
+        <ModalMenssagem nome={menssagemBox.infoUser.nome} />
+      ) : null}
       <div className="background-drop">
         <h1 className="nome-user">Olá Usuario</h1>
         {grupos.map((grupo) => (
           <div className="grupos" key={grupo.id}>
-            <DropDown grupoNome={grupo.nome} users={users} idGrupo={grupo.id} />
+            <DropDown
+              grupoNome={grupo.nome}
+              users={users}
+              idGrupo={grupo.id}
+              openModalGrupo={() =>
+                setMenssagemBox((old) => ({
+                  infoUser: grupo,
+                  isOpen: !old.isOpen,
+                }))
+              }
+            />
           </div>
         ))}
       </div>

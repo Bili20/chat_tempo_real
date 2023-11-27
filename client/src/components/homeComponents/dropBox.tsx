@@ -5,6 +5,7 @@ interface IProps {
   idGrupo: number;
   grupoNome: string;
   users: pessoas[];
+  openModalGrupo: () => void;
 }
 
 const DropDown = (props: IProps) => {
@@ -16,7 +17,7 @@ const DropDown = (props: IProps) => {
         <button onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
-        <button className="conversa" onClick={}>
+        <button className="conversa" onClick={() => props.openModalGrupo()}>
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
