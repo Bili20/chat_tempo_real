@@ -1,7 +1,7 @@
 import "../components/cadastroPessoa/style/cadastroPessoa.css";
 import NavBar from "../components/navbarComponents/navBar";
 import { webFetch } from "../axios/axiosConfig";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type pessoa = {
   nome: string;
@@ -17,8 +17,16 @@ const INIT_ALL_USER = {
   senha: "",
 };
 
+type grupos = {
+  id: number;
+  nome: string;
+  descricao: string;
+};
+
 const CadastroPessoa = () => {
   const [user, setUser] = useState<pessoa>(INIT_ALL_USER);
+  const [grupos, setGrupo] = useState<grupos[]>([]);
+  const [selectedValue, setSelectedValue] = useState("");
 
   const criarUser = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +42,22 @@ const CadastroPessoa = () => {
         setUser(e);
       });
   };
+  const getGrupos = async () => {
+    try {
+      const response = await webFetch.get("/grupo");
+
+      const data = response.data;
+
+      setGrupo(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getGrupos();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -91,6 +115,22 @@ const CadastroPessoa = () => {
                 setUser((old) => ({ ...old, cpf: e.target.value }))
               }
             />
+          </div>
+          <div className="form-control">
+            <select
+              name="grupos"
+              id="grupos"
+              defaultValue={""}
+              value={selectedValue}
+              onChange={(e) => setSelectedValue(e.target.value)}
+            >
+              <option value="" disabled hidden>
+                Selecione um Grupo
+              </option>
+              {grupos.map((grupo) => (
+                <option value={grupo.id}>{grupo.nome}</option>
+              ))}
+            </select>
           </div>
           <input type="submit" value="Criar" className="btn" />
         </form>

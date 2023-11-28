@@ -12,6 +12,10 @@ form {
   margin: 0 auto;
 }
 
+select {
+  max-width: 200px;
+}
+
 .form-control {
   display: flex;
   flex-direction: column;
@@ -23,7 +27,8 @@ form {
 }
 
 .form-control input,
-.form-control textarea {
+.form-control textarea,
+.form-control select {
   padding: 0.5rem;
   border-radius: 5px;
   border: none;
