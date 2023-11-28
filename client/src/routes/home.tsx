@@ -1,11 +1,10 @@
 import NavBar from "../components/navbarComponents/navBar";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { URL } from "../constants/constants";
 import "../components/homeComponents/style/dropBox.css";
 import DropDown from "../components/homeComponents/dropBox";
 import ModalMenssagem from "../components/homeComponents/modalMenssagem";
+import { webFetch } from "../axios/axiosConfig";
 
 export type pessoas = {
   email: string;
@@ -39,7 +38,7 @@ const Home = () => {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get(`${URL}/pessoa`);
+      const response = await webFetch.get("/pessoa");
 
       const data = response.data;
 
@@ -51,7 +50,7 @@ const Home = () => {
 
   const getGrupos = async () => {
     try {
-      const response = await axios.get(`${URL}/grupo`);
+      const response = await webFetch.get("/grupo");
 
       const data = response.data;
 

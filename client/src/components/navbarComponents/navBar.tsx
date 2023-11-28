@@ -8,8 +8,13 @@ const NavBar = () => {
       </h2>
       <ul>
         <li>
-          <Link to={`/`} className="bnt-sair">
+          <Link to={`/`} className="btn">
             Sair
+          </Link>
+        </li>
+        <li>
+          <Link to={"/cadastro/user"} className="btn">
+            Cadastro de Usuario
           </Link>
         </li>
       </ul>
