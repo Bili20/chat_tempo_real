@@ -7,6 +7,7 @@
 #root {
   height: 100vh;
   overflow: hidden;
+  background-color: rgb(34, 32, 32);
 }
 
 ul {
@@ -21,5 +22,13 @@ a {
 }
 
 a:hover {
+  opacity: 1;
+}
+
+.btn {
+  font-weight: bold;
+  border: 1px solid rgb(228, 227, 227);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   opacity: 1;
 }
