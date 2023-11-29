@@ -5,9 +5,9 @@ import "./index.css";
 import Home from "./routes/home.tsx";
 import Login from "./routes/login.tsx";
 
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import CadastroPessoa from "./routes/cadastroPessoa.tsx";
-//import AuthRouter from "./routes/_auth.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CadastroPessoa from "./routes/cadastros/cadastroPessoa.tsx";
+import CadastroGrupo from "./routes/cadastros/cadastroGrupo.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/cadastro/user",
         element: <CadastroPessoa />,
+      },
+      {
+        path: "/cadastro/grupo",
+        element: <CadastroGrupo />,
       },
     ],
   },
