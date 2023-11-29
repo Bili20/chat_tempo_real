@@ -1,0 +1,35 @@
+.cadastro-user h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.cadastro-user {
+  color: white;
+}
+
+form {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+select {
+  max-width: 200px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-control label {
+  margin-bottom: 0.5rem;
+}
+
+.form-control input,
+.form-control textarea,
+.form-control select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+}
