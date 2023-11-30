@@ -1,10 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style/navBar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/auth/authContext";
 const NavBar = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const deslogar = async () => {
+    auth.signOut();
+    localStorage.setItem("AuthAccess", "");
+    navigate("/");
+  };
+
   return (
     <nav className="navbar">
       <h2>
-        <Link to={`/home`}>Wave</Link>
+        <Link to={`/`}>Wave</Link>
       </h2>
       <ul>
         <li>
@@ -18,9 +29,9 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to={`/`} className="btn">
+          <button onClick={deslogar} className="btn">
             Sair
-          </Link>
+          </button>
         </li>
       </ul>
     </nav>
