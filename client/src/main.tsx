@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import Home from "./routes/home.tsx";
-import Login from "./routes/login.tsx";
+import Home from "./routes/home/home.tsx";
+import Login from "./routes/login/login.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CadastroPessoa from "./routes/cadastros/cadastroPessoa.tsx";
 import CadastroGrupo from "./routes/cadastros/cadastroGrupo.tsx";
+import { AuthProvider } from "./contexts/auth/authProvider.tsx";
+import { RequireAuth } from "./contexts/auth/RequireAuth.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,19 +18,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Login />,
-      },
-      {
-        path: "/home",
-        element: <Home />,
+        element: (
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        ),
       },
       {
         path: "/cadastro/user",
-        element: <CadastroPessoa />,
+        element: (
+          <RequireAuth>
+            <CadastroPessoa />
+          </RequireAuth>
+        ),
       },
       {
         path: "/cadastro/grupo",
-        element: <CadastroGrupo />,
+        element: (
+          <RequireAuth>
+            <CadastroGrupo />
+          </RequireAuth>
+        ),
       },
     ],
   },
@@ -36,14 +46,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/*  <Router>
-      <Routes>
-        <Route element={<AuthRouter />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<p>oi</p>} />
-        </Route>
-      </Routes>
-    </Router> */}
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
