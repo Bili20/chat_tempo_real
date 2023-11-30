@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { pessoas } from "../../routes/home";
+import { pessoas } from "../../routes/home/home";
 
 interface IProps {
   idGrupo: number;
