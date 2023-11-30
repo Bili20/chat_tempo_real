@@ -4,20 +4,24 @@ import { AuthController } from "../controllers/auth/authController";
 
 const pessoaRoutes = express.Router();
 
-pessoaRoutes.post("/pessoa", PessoaController.createPessoa);
+pessoaRoutes.post(
+  "/pessoa",
+  AuthController.verificaJWt,
+  PessoaController.createPessoa
+);
 pessoaRoutes.get(
   "/pessoa",
-  //AuthController.verificaJWt,
+  AuthController.verificaJWt,
   PessoaController.findAllPessoa
 );
 pessoaRoutes.patch(
   "/pessoa/:idPessoa/envia/grupo/:idGrupo",
-  //AuthController.verificaJWt,
+  AuthController.verificaJWt,
   PessoaController.sendPessoaToGrupo
 );
 pessoaRoutes.delete(
   "/pessoa/:id",
-  //AuthController.verificaJWt,
+  AuthController.verificaJWt,
   PessoaController.destroyPessoa
 );
 

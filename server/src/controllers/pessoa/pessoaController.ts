@@ -5,6 +5,7 @@ import { prismaClient } from "../../config/prismaClient";
 import { IPessoa, IPessoaCadastro } from "./interfaces/interfacePessoa";
 import { GrupoController } from "../grupo/grupoController";
 import { GruposPessoasController } from "../gruposPessoas/gruposPessoasController";
+import { AuthController } from "../auth/authController";
 export class PessoaController {
   static async createPessoa(req: Request, res: Response) {
     let IPessoaCadastro: IPessoaCadastro = req.body;
@@ -77,11 +78,9 @@ export class PessoaController {
       await GruposPessoasController.createGruposPessoas(pessoa.id, grupo.id);
       res.status(200).json();
     } catch (e) {
-      res
-        .status(400)
-        .json({
-          messgae: `Erro ao adicionar pessoa, verifique se ela já faz parte do grupo: ${e}`,
-        });
+      res.status(400).json({
+        messgae: `Erro ao adicionar pessoa, verifique se ela já faz parte do grupo: ${e}`,
+      });
     }
   }
 
