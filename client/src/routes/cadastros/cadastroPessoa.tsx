@@ -36,7 +36,6 @@ const CadastroPessoa = () => {
         ...user,
       });
       setUser(INIT_ALL_USER);
-      console.log();
       adicionaGrupo(usuario.data.id, Number(selectedValue));
     } catch (e) {
       console.error(e);
@@ -59,7 +58,7 @@ const CadastroPessoa = () => {
 
       setGrupo(data);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -137,11 +136,15 @@ const CadastroPessoa = () => {
                 Selecione um Grupo
               </option>
               {grupos.map((grupo) => (
-                <option value={grupo.id}>{grupo.nome}</option>
+                <option key={grupo.id} value={grupo.id}>
+                  {grupo.nome}
+                </option>
               ))}
             </select>
           </div>
-          <input type="submit" value="Criar" className="btn" />
+          <button type="submit" className="btn">
+            Criar
+          </button>
         </form>
       </div>
     </>
