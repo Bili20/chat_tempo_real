@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="280,261" last-zoom="1.05" max-obj-count="9"
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="280,756" last-zoom="1.05" max-obj-count="9"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -129,10 +129,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
+		<object name="id_grupo" index="4"/>
 		<object name="id_pessoa" index="3"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="grupo_fk" index="2"/>
 		<object name="pessoa_fk" index="1"/>
 	</customidxs>
 </table>
@@ -237,6 +239,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <constraint name="grupo_pessoa_uq" type="uq-constr" table="public.grupos_pessoas">
 	<columns names="id_pessoa,id_grupo" ref-type="src-columns"/>
+</constraint>
+
+<constraint name="conversa_grupo_pessoa_uq" type="uq-constr" table="public.conversa">
+	<columns names="id_pessoa,id_grupo" ref-type="src-columns"/>
+</constraint>
+
+<constraint name="emissor_receptor_uq" type="uq-constr" table="public.conversa">
+	<columns names="id_pessoa,id_receptor" ref-type="src-columns"/>
 </constraint>
 
 </dbmodel>
