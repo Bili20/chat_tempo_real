@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import Home from "./routes/home/home.tsx";
-import Login from "./routes/login/login.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CadastroPessoa from "./routes/cadastros/cadastroPessoa.tsx";
 import CadastroGrupo from "./routes/cadastros/cadastroGrupo.tsx";
 import { AuthProvider } from "./contexts/auth/authProvider.tsx";
 import { RequireAuth } from "./contexts/auth/RequireAuth.tsx";
+import TelaConversa from "./routes/telaConversa/telaConversa.tsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <CadastroGrupo />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/conversa",
+        element: (
+          <RequireAuth>
+            <TelaConversa />
           </RequireAuth>
         ),
       },
