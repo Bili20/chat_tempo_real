@@ -64,4 +64,13 @@ export class AuthController {
       res.status(401).json();
     }
   }
+
+  static async currentUser(access: string) {
+    const decodeToken = jwt.verify(
+      access,
+      process.env.SECRET_JWT as string
+    ) as IUser;
+
+    return decodeToken;
+  }
 }
