@@ -5,7 +5,6 @@ import { prismaClient } from "../../config/prismaClient";
 import { IPessoa, IPessoaCadastro } from "./interfaces/interfacePessoa";
 import { GrupoController } from "../grupo/grupoController";
 import { GruposPessoasController } from "../gruposPessoas/gruposPessoasController";
-import { AuthController } from "../auth/authController";
 export class PessoaController {
   static async createPessoa(req: Request, res: Response) {
     let IPessoaCadastro: IPessoaCadastro = req.body;
@@ -43,6 +42,15 @@ export class PessoaController {
       res.status(200).json(pessoas);
     } catch (e) {
       res.status(400).json({ message: `${e} - falha na consulta` });
+    }
+  }
+
+  static async findOnePessoa(id: number) {
+    const pessoa = await prismaClient.pessoa.findUnique({ where: { id: id } });
+    if (pessoa) {
+      return pessoa;
+    } else {
+      throw new Error();
     }
   }
 
