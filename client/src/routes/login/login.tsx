@@ -1,7 +1,7 @@
 import "./style/loginTela.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
-
+import { socket } from "../../socket/socket";
 type payload = {
   email: string;
   senha: string;
@@ -19,9 +19,11 @@ const Login = () => {
     e.preventDefault();
     if (payload.email && payload.senha) {
       const isLogged = await auth.signIn(payload.email, payload.senha);
+
       if (!isLogged) {
         alert("email ou senha incorreto");
       }
+      //socket.emit("connection", "alo servidor");
     }
   };
 

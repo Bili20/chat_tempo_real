@@ -2,9 +2,8 @@ import NavBar from "../../components/navbarComponents/navBar";
 import { useState, useEffect, useContext } from "react";
 import "../../components/homeComponents/style/dropBox.css";
 import DropDown from "../../components/homeComponents/dropBox";
-import ModalMenssagem from "../../components/homeComponents/modalMenssagem";
+import TelaConversa from "../telaConversa/telaConversa";
 import { webFetch } from "../../axios/axiosConfig";
-import { User } from "../../contexts/auth/type/user";
 import { AuthContext } from "../../contexts/auth/authContext";
 
 export type pessoas = {
@@ -70,9 +69,6 @@ const Home = () => {
   return (
     <>
       <NavBar />
-      {menssagemBox ? (
-        <ModalMenssagem nome={menssagemBox.infoUser.nome} />
-      ) : null}
       <div className="background-drop">
         <h1 className="nome-user">Olá {auth.user?.nome}</h1>
         {grupos.map((grupo) => (
@@ -81,12 +77,6 @@ const Home = () => {
               grupoNome={grupo.nome}
               users={pessoas}
               idGrupo={grupo.id}
-              openModalGrupo={() =>
-                setMenssagemBox((old) => ({
-                  infoUser: grupo,
-                  isOpen: !old.isOpen,
-                }))
-              }
             />
           </div>
         ))}
