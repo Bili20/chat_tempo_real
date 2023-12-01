@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { pessoas } from "../../routes/home/home";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   idGrupo: number;
   grupoNome: string;
   users: pessoas[];
-  openModalGrupo: () => void;
 }
 
 const DropDown = (props: IProps) => {
   const [open, setOpen] = useState(false);
+  const navegation = useNavigate();
 
   return (
     <>
@@ -17,7 +18,7 @@ const DropDown = (props: IProps) => {
         <button onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
-        <button className="conversa" onClick={() => props.openModalGrupo()}>
+        <button className="conversa" onClick={() => navegation("/conversa")}>
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
