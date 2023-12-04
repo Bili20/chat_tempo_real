@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { pessoas } from "../../routes/home/home";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth/authContext";
+import { io } from "socket.io-client";
 
 interface IProps {
   idGrupo: number;
