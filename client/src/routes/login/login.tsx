@@ -1,7 +1,7 @@
 import "./style/loginTela.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
-import { io } from "socket.io-client";
+
 type payload = {
   email: string;
   senha: string;
@@ -24,11 +24,6 @@ const Login = () => {
         alert("email ou senha incorreto");
       }
     }
-  };
-
-  const socket = () => {
-    const socket = io("http://localhost:3002");
-    socket.emit("user", { id: 1, nome: "gabriel" });
   };
 
   return (
@@ -60,9 +55,7 @@ const Login = () => {
             placeholder="Digite sua senha"
           />
         </div>
-        <button onClick={socket} type="submit">
-          Entrar
-        </button>
+        <button type="submit">Entrar</button>
       </form>
     </div>
   );
