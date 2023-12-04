@@ -4,11 +4,7 @@ import { AuthController } from "../controllers/auth/authController";
 
 const pessoaRoutes = express.Router();
 
-pessoaRoutes.post(
-  "/pessoa",
-  AuthController.verificaJWt,
-  PessoaController.createPessoa
-);
+pessoaRoutes.post("/pessoa", PessoaController.createPessoa);
 pessoaRoutes.get(
   "/pessoa",
   AuthController.verificaJWt,
