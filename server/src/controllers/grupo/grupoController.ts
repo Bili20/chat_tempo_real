@@ -15,6 +15,21 @@ export class GrupoController {
     return grupo;
   }
 
+  static async findGrupoForid(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      const grupo = await prismaClient.grupo.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+      res.status(200).json(grupo);
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
   static async findAllGrupos(req: Request, res: Response) {
     try {
       const grupo = await prismaClient.grupo.findMany();
