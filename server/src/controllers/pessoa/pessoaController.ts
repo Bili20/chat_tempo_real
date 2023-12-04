@@ -55,7 +55,7 @@ export class PessoaController {
   }
 
   static async findPessoaPorEmail(email: string): Promise<IPessoa | undefined> {
-    const pessoa = await prismaClient.pessoa.findUnique({
+    const pessoa = await prismaClient.pessoa.findFirst({
       where: { email: email },
     });
 
