@@ -36,14 +36,14 @@ export class ConversaController {
           IConversa.idGrupo
         );
         const mensagens = await MensagemGrupoController.findMensagemUser(
-          conversa.id
+          IConversa.idGrupo
         );
-        res.status(200).json({ mensagens });
+        res.status(200).json(mensagens);
       } else {
         const mensagens = await MensagemGrupoController.findMensagemUser(
-          conversa.id
+          IConversa.idGrupo
         );
-        res.status(200).json({ mensagens });
+        res.status(200).json(mensagens);
       }
     } catch (e) {
       throw new Error(e);
