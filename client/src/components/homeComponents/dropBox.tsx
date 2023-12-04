@@ -18,7 +18,10 @@ const DropDown = (props: IProps) => {
         <button onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
-        <button className="conversa" onClick={() => navegation("/conversa")}>
+        <button
+          className="conversa"
+          onClick={() => navegation(`/conversa/${props.idGrupo}`)}
+        >
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
