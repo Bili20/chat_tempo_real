@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./style/telaConversa.css";
 import NavBar from "../../components/navbarComponents/navBar";
 import { useParams } from "react-router-dom";
 import { webFetch } from "../../axios/axiosConfig";
-import { AuthContext } from "../../contexts/auth/authContext";
+
+import { io } from "socket.io-client";
 
 type grupo = {
   id: number;
@@ -43,7 +44,6 @@ const TelaConversa = () => {
         access: storageData,
         idGrupo: Number(idGrupo),
       });
-      console.log(mensagens);
       setMensagensBox(mensagens.data);
     } catch (e) {
       console.log(e);
@@ -51,6 +51,16 @@ const TelaConversa = () => {
   };
 
   // preciso enviar mensagem
+  //
+  useEffect(() => {
+    const socketIo = io("http://localhost:3002");
+
+    return () => {
+      socketIo.on("disconnect", () => {
+        console.log(socketIo.id);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     getGrupo();
