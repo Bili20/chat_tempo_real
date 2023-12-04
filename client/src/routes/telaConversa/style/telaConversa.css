@@ -1,38 +1,37 @@
+li {
+  color: black;
+}
+
 .modal {
-  background-color: antiquewhite;
-  display: flex;
-  height: 500px;
-  width: 450px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  flex-direction: column-reverse;
-}
-.titulo h2 {
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  color: white;
+  background-color: azure;
 }
 
-.conteudo {
-  padding: 0px 0px 30px;
-  color: aliceblue;
-}
-.texto p {
-  display: flex;
-  background-color: blueviolet;
-  width: 200px;
-  justify-content: left;
-  text-align: left;
+.user,
+.titulo {
+  color: blue;
 }
 
-.caixa-digito {
-  flex-direction: column-reverse;
-
-  height: 50px;
+div input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
 }
-
-.nome-user {
-  font-size: 12px;
+div .envia-mensagem {
+  font-weight: bold;
+  border: 1px solid rgb(228, 227, 227);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  opacity: 1;
+}
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#messages li {
+  color: black;
+  padding: 5px 10px;
+}
+#messages li:nth-child(odd) {
+  background: #eee;
 }
