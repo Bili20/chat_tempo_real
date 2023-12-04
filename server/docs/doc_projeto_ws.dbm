@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="280,756" last-zoom="1.05" max-obj-count="9"
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,497" last-zoom="1.05" max-obj-count="9"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -116,7 +116,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 	<position x="1120" y="1000"/>
 	<column name="id" not-null="true">
-		<type name="bigserial" length="0"/>
+		<type name="serial" length="0"/>
 	</column>
 	<column name="id_receptor">
 		<type name="integer" length="0"/>
@@ -161,7 +161,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 	<position x="540" y="980"/>
 	<column name="id" not-null="true">
-		<type name="bigserial" length="0"/>
+		<type name="serial" length="0"/>
 	</column>
 	<column name="mensagem" not-null="true">
 		<type name="text" length="0"/>
@@ -206,7 +206,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 	<position x="1000" y="620"/>
 	<column name="id" not-null="true">
-		<type name="bigserial" length="0"/>
+		<type name="serial" length="0"/>
 	</column>
 	<column name="mensagem" not-null="true">
 		<type name="text" length="0"/>
@@ -217,6 +217,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="mensagem_grupo_pk" type="pk-constr" table="public.mensagem_grupo">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_conversa" index="3"/>
+		<object name="id_pessoa" index="4"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="conversa_fk" index="1"/>
+		<object name="pessoa_fk" index="2"/>
+	</customidxs>
 </table>
 
 <relationship name="conversa_has_many_mensagem_grupo" type="rel1n" layers="0"
