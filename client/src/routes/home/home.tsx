@@ -2,7 +2,6 @@ import NavBar from "../../components/navbarComponents/navBar";
 import { useState, useEffect, useContext } from "react";
 import "../../components/homeComponents/style/dropBox.css";
 import DropDown from "../../components/homeComponents/dropBox";
-import TelaConversa from "../telaConversa/telaConversa";
 import { webFetch } from "../../axios/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
 
@@ -30,12 +29,6 @@ const Home = () => {
   const auth = useContext(AuthContext);
   const [pessoas, setPessoa] = useState<pessoas[]>([]);
   const [grupos, setGrupo] = useState<grupos[]>([]);
-  const [menssagemBox, setMenssagemBox] = useState({
-    isOpen: false,
-    infoUser: {
-      nome: "",
-    },
-  });
 
   const getUsers = async () => {
     try {
