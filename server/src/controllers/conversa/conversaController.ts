@@ -3,38 +3,50 @@ import { AuthController } from "../auth/authController";
 import { prismaClient } from "../../config/prismaClient";
 import { PessoaController } from "../pessoa/pessoaController";
 import { IConversaGrupo } from "./interface/interfaceConversa";
+import { MensagemGrupoController } from "../mensagemGrupo/mensagemGrupoController";
 
 export class ConversaController {
-  static async initConversaGrupo(idEmissor: number, idGrupo: number) {
+  static async initConversaGrupo(
+    idEmissor: number,
+    idGrupo: number
+  ): Promise<any> {
     try {
-      await prismaClient.conversa.create({
+      const conversa = await prismaClient.conversa.create({
         data: { id_pessoa: idEmissor, id_grupo: idGrupo },
       });
-
-      return;
+      return conversa;
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   }
 
-  static async findConversaUserGrupo(res: Response, req: Request) {
+  static async findConversaUserGrupo(req: Request, res: Response) {
     const IConversa: IConversaGrupo = req.body;
+    try {
+      const user = await AuthController.currentUser(IConversa.access);
+      const pessoa = await PessoaController.findOnePessoa(user.id);
 
-    const user = await AuthController.currentUser(IConversa.access);
-    const pessoa = await PessoaController.findOnePessoa(user.id);
+      const conversa = await prismaClient.conversa.findFirst({
+        where: { id_pessoa: pessoa.id, id_grupo: IConversa.idGrupo },
+      });
 
-    const conversa = await prismaClient.conversa.findMany({
-      where: {
-        id_grupo: IConversa.idGrupo,
-        id_pessoa: pessoa.id,
-      },
-    });
-
-    if (conversa.length <= 0) {
-      await this.initConversaGrupo(pessoa.id, IConversa.idGrupo);
-      //chama outra função para trazer as menssagens
-    } else {
-      //chama outra função para trazer as menssagens
+      if (conversa == null) {
+        const conversa = await ConversaController.initConversaGrupo(
+          pessoa.id,
+          IConversa.idGrupo
+        );
+        const mensagens = await MensagemGrupoController.findMensagemUser(
+          conversa.id
+        );
+        res.status(200).json({ mensagens });
+      } else {
+        const mensagens = await MensagemGrupoController.findMensagemUser(
+          conversa.id
+        );
+        res.status(200).json({ mensagens });
+      }
+    } catch (e) {
+      throw new Error(e);
     }
   }
 }
