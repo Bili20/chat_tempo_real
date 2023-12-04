@@ -5,11 +5,11 @@ io.on("connection", (socket) => {
   console.log("Usuario conectado:", socket.id);
 
   socket.on("disconnect", () => {
-    console.log("Usuario disconectado", socket.id);
+    console.log("Usuario desconectado", socket.id);
   });
 
   socket.on("user", (user) => {
-    socket.data.user = user;
+    socket.data.username = user;
   });
 });
 
