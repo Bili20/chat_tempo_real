@@ -19,9 +19,9 @@ export class MensagemGrupoController {
     }
   }
 
-  static async findMensagemUser(idConversa: number) {
+  static async findMensagemUser(idGrupo: number) {
     const mensagens = await prismaClient.mensagem_grupo.findMany({
-      where: { id_conversa: idConversa },
+      where: { conversa: { id_grupo: idGrupo } },
     });
     return mensagens;
   }
