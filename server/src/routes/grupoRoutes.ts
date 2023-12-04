@@ -9,6 +9,12 @@ grupoRoutes.get(
   GrupoController.findAllGrupos
 );
 
+grupoRoutes.get(
+  "/grupo/:id",
+  AuthController.verificaJWt,
+  GrupoController.findGrupoForid
+);
+
 grupoRoutes.post(
   "/grupo",
   AuthController.verificaJWt,
