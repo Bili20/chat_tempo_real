@@ -8,7 +8,7 @@ datasource db {
 }
 
 model conversa {
-  id               BigInt             @id(map: "conversa_pk") @default(autoincrement())
+  id               Int                @id(map: "conversa_pk") @default(autoincrement())
   id_receptor      Int?
   data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
   id_pessoa        Int
@@ -42,20 +42,20 @@ model grupos_pessoas {
 }
 
 model mensagem_grupo {
-  id            BigInt   @id(map: "mensagem_grupo_pk") @default(autoincrement())
+  id            Int      @id(map: "mensagem_grupo_pk") @default(autoincrement())
   mensagem      String
   data_cadastro DateTime @default(now()) @db.Timestamptz(6)
-  id_conversa   BigInt
+  id_conversa   Int
   id_pessoa     Int
   conversa      conversa @relation(fields: [id_conversa], references: [id], map: "conversa_fk")
   pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
 }
 
 model mensagem_privada {
-  id            BigInt   @id(map: "mensagem_privada_pk") @default(autoincrement())
+  id            Int      @id(map: "mensagem_privada_pk") @default(autoincrement())
   mensagem      String
   data_cadastro DateTime @default(now()) @db.Timestamptz(6)
-  id_conversa   BigInt
+  id_conversa   Int
   id_pessoa     Int
   conversa      conversa @relation(fields: [id_conversa], references: [id], map: "conversa_fk")
   pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
