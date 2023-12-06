@@ -14,25 +14,31 @@ const DropDown = (props: IProps) => {
   const [open, setOpen] = useState(false);
   const navegation = useNavigate();
 
-  const postConversa = async () => {
+  const postConversaGrupo = async () => {
     const storageData = localStorage.getItem("AuthAccess");
     try {
       const mensagens = await webFetch.post("/conversa/grupo", {
         access: storageData,
         idGrupo: Number(props.idGrupo),
       });
-      return mensagens.data;
+      const mensagemData = mensagens.data;
+      navegation(`/conversa/${mensagemData.id}/grupo/${props.idGrupo}`);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const enviaConversa = async () => {
+  const postConversaPrivada = async (idReceptor: number) => {
+    const storageData = localStorage.getItem("AuthAccess");
     try {
-      const mensagemData = await postConversa();
-      navegation(`/conversa/${props.idGrupo}/conversa/${mensagemData.id}`);
-    } catch (err) {
-      console.log(err);
+      const mensagens = await webFetch.post("/conversa/privada", {
+        access: storageData,
+        idReceptor: idReceptor,
+      });
+      const mensagemData = mensagens.data;
+      navegation(`/conversa/${mensagemData.id}/privada`);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -42,7 +48,7 @@ const DropDown = (props: IProps) => {
         <button onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
-        <button className="conversa" onClick={enviaConversa}>
+        <button className="conversa" onClick={postConversaGrupo}>
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
@@ -55,7 +61,9 @@ const DropDown = (props: IProps) => {
               <ul className="menu">
                 {filtro.length > 0 ? (
                   <li className="menu-item" key={user.id}>
-                    <h2>{user.nome}</h2>
+                    <button onClick={() => postConversaPrivada(user.id)}>
+                      {user.nome}
+                    </button>
                   </li>
                 ) : null}
               </ul>
