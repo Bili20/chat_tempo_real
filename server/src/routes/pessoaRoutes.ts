@@ -10,6 +10,11 @@ pessoaRoutes.get(
   AuthController.verificaJWt,
   PessoaController.findAllPessoa
 );
+pessoaRoutes.get(
+  "/pessoa/:id",
+  AuthController.verificaJWt,
+  PessoaController.findPessoaForId
+);
 pessoaRoutes.patch(
   "/pessoa/:idPessoa/envia/grupo/:idGrupo",
   AuthController.verificaJWt,
