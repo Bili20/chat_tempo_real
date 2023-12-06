@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { pessoas } from "../../routes/home/home";
 import { useNavigate } from "react-router-dom";
 
 import { webFetch } from "../../axios/axiosConfig";
+import { AuthContext } from "../../contexts/auth/authContext";
 
 interface IProps {
   idGrupo: number;
@@ -13,6 +14,7 @@ interface IProps {
 const DropDown = (props: IProps) => {
   const [open, setOpen] = useState(false);
   const navegation = useNavigate();
+  const auth = useContext(AuthContext);
 
   const postConversaGrupo = async () => {
     const storageData = localStorage.getItem("AuthAccess");
@@ -35,8 +37,15 @@ const DropDown = (props: IProps) => {
         access: storageData,
         idReceptor: idReceptor,
       });
+
       const mensagemData = mensagens.data;
-      navegation(`/conversa/${mensagemData.id}/privada`);
+      let changeUser: number | undefined;
+      if (auth.user?.id === mensagemData.id_receptor) {
+        changeUser = mensagemData.id_pessoa;
+      } else {
+        changeUser = mensagemData.id_receptor;
+      }
+      navegation(`/conversa/${mensagemData.id}/privada/receptor/${changeUser}`);
     } catch (e) {
       console.log(e);
     }
