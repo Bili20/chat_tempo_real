@@ -4,6 +4,7 @@ import { authRoutes } from "./authRoutes";
 import { grupoRoutes } from "./grupoRoutes";
 import { conversaRoutes } from "./conversaRoutes";
 import { mensagemGrupoRoutes } from "./mensagemGrupoRoutes";
+import { mensagemPrivadaRoutes } from "./mensagemPrivadaRoutes";
 
 const routes = (app: any) => {
   app
@@ -16,7 +17,8 @@ const routes = (app: any) => {
     authRoutes,
     grupoRoutes,
     conversaRoutes,
-    mensagemGrupoRoutes
+    mensagemGrupoRoutes,
+    mensagemPrivadaRoutes
   );
 };
 
