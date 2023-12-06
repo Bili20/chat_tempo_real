@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/conversa/:idConversa/privada",
+        path: "/conversa/:idConversa/privada/receptor/:idReceptor",
         element: (
           <RequireAuth>
             <TelaConversaPrivada />
