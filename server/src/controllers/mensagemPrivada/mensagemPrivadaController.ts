@@ -18,4 +18,43 @@ export class MensagemPrivadaController {
       throw new Error(e);
     }
   }
+
+  static async findMensagemUser(req: Request, res: Response) {
+    const { idEmissor, idReceptor } = req.params;
+    try {
+      const mensagem = await prismaClient.mensagem_privada.findMany({
+        where: {
+          OR: [
+            {
+              conversa: {
+                id_pessoa: Number(idEmissor),
+                id_receptor: Number(idReceptor),
+              },
+            },
+            {
+              conversa: {
+                id_pessoa: Number(idReceptor),
+                id_receptor: Number(idEmissor),
+              },
+            },
+          ],
+        },
+        select: {
+          id: true,
+          mensagem: true,
+          data_cadastro: true,
+          id_conversa: true,
+          id_pessoa: true,
+          pessoa: {
+            select: {
+              nome: true,
+            },
+          },
+        },
+      });
+      res.status(200).json(mensagem);
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
 }
