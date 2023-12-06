@@ -9,4 +9,10 @@ mensagemPrivadaRoutes.post(
   MensagemPrivadaController.createMensagem
 );
 
+mensagemPrivadaRoutes.get(
+  "/mensagens/privada/emissor/:idEmissor/receptor/:idReceptor",
+  AuthController.verificaJWt,
+  MensagemPrivadaController.findMensagemUser
+);
+
 export { mensagemPrivadaRoutes };
