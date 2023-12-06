@@ -23,7 +23,7 @@ type mensagens = {
   };
 }[];
 
-const TelaConversa = () => {
+const TelaConversaGrupo = () => {
   const [mensagensBox, setMensagensBox] = useState<mensagens>([]);
   const [grupo, setGrupo] = useState<grupo>();
   const { idGrupo, idConversa } = useParams();
@@ -101,4 +101,4 @@ const TelaConversa = () => {
   );
 };
 
-export default TelaConversa;
+export default TelaConversaGrupo;
