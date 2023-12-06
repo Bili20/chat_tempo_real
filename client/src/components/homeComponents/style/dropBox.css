@@ -32,8 +32,8 @@
   display: flex;
   justify-content: left;
 }
-.grupos h2 {
-  color: black;
+
+.menu-item button {
   background-color: rgb(148, 152, 207);
-  padding: 0.1rem;
+  text-align: left;
 }
