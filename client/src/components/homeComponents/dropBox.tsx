@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { pessoas } from "../../routes/home/home";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/auth/authContext";
-import { io } from "socket.io-client";
+
+import { webFetch } from "../../axios/axiosConfig";
 
 interface IProps {
   idGrupo: number;
@@ -14,16 +14,35 @@ const DropDown = (props: IProps) => {
   const [open, setOpen] = useState(false);
   const navegation = useNavigate();
 
+  const postConversa = async () => {
+    const storageData = localStorage.getItem("AuthAccess");
+    try {
+      const mensagens = await webFetch.post("/conversa/grupo", {
+        access: storageData,
+        idGrupo: Number(props.idGrupo),
+      });
+      return mensagens.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const enviaConversa = async () => {
+    try {
+      const mensagemData = await postConversa();
+      navegation(`/conversa/${props.idGrupo}/conversa/${mensagemData.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <div className="btn-grupos">
         <button onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
-        <button
-          className="conversa"
-          onClick={() => navegation(`/conversa/${props.idGrupo}`)}
-        >
+        <button className="conversa" onClick={enviaConversa}>
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
