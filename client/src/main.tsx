@@ -9,7 +9,8 @@ import CadastroPessoa from "./routes/cadastros/cadastroPessoa.tsx";
 import CadastroGrupo from "./routes/cadastros/cadastroGrupo.tsx";
 import { AuthProvider } from "./contexts/auth/authProvider.tsx";
 import { RequireAuth } from "./contexts/auth/RequireAuth.tsx";
-import TelaConversa from "./routes/telaConversa/telaConversaGrupo.tsx";
+import TelaConversaGrupo from "./routes/telaConversa/telaConversaGrupo.tsx";
+import TelaConversaPrivada from "./routes/telaConversa/telaConversaPrivada.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,10 +42,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/conversa/:idGrupo/conversa/:idConversa",
+        path: "/conversa/:idConversa/grupo/:idGrupo",
         element: (
           <RequireAuth>
-            <TelaConversa />
+            <TelaConversaGrupo />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/conversa/:idConversa/privada",
+        element: (
+          <RequireAuth>
+            <TelaConversaPrivada />
           </RequireAuth>
         ),
       },
