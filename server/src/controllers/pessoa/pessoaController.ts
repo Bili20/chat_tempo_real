@@ -50,8 +50,21 @@ export class PessoaController {
     if (pessoa) {
       return pessoa;
     } else {
-      throw new Error();
+      throw new Error("Usuario não encontrado");
     }
+  }
+
+  static async findPessoaForId(req: Request, res: Response) {
+    const { id } = req.params;
+    const pessoa = await prismaClient.pessoa.findUnique({
+      where: { id: Number(id) },
+      select: {
+        id: true,
+        nome: true,
+        email: true,
+      },
+    });
+    res.status(200).json(pessoa);
   }
 
   static async findPessoaPorEmail(email: string): Promise<IPessoa | undefined> {
