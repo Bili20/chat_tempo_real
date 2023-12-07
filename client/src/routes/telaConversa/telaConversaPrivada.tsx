@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import NavBar from "../../components/navbarComponents/navBar";
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
+import { socket } from "../../config/socket";
 type mensagens = {
   id: number;
   mensagem: string;
@@ -19,10 +20,12 @@ type pessoa = {
   nome: string;
   email: string;
 };
+
 const TelaConversaPrivada = () => {
   const { idConversa, idReceptor } = useParams();
   const [mensagensBox, setMensagensBox] = useState<mensagens>([]);
   const [pessoa, setPessoa] = useState<pessoa>();
+  const [mensagem, setMensagem] = useState<string>("");
   const auth = useContext(AuthContext);
 
   const getUser = async () => {
@@ -41,7 +44,22 @@ const TelaConversaPrivada = () => {
     }
   };
 
+  const enviaMensagem = async () => {
+    try {
+      await webFetch
+        .post("/mensagem/privada", {
+          mensagem: mensagem,
+          idConversa: Number(idConversa),
+          idPessoa: auth.user?.id,
+        })
+        .then(() => setMensagem(""));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
+    socket.connect();
     getMensagens();
     getUser();
   }, []);
@@ -65,8 +83,15 @@ const TelaConversaPrivada = () => {
         })}
       </div>
       <div>
-        <input type="text" placeholder="Digite aqui" />
-        <button className="envia-mensagem">enviar</button>
+        <input
+          onChange={(e) => setMensagem(e.target.value)}
+          value={mensagem}
+          type="text"
+          placeholder="Digite aqui"
+        />
+        <button onClick={enviaMensagem} className="envia-mensagem">
+          enviar
+        </button>
       </div>
     </>
   );
