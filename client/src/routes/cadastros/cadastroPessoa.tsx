@@ -1,6 +1,6 @@
 import "./style/cadastroPessoa.css";
 import NavBar from "../../components/navbarComponents/navBar";
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 import { useEffect, useState } from "react";
 
 export type pessoa = {
