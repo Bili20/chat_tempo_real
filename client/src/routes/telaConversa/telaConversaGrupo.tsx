@@ -29,6 +29,7 @@ const TelaConversaGrupo = () => {
   const { idGrupo, idConversa } = useParams();
   const [mensagem, setMensagem] = useState<string>("");
   const auth = useContext(AuthContext);
+  const [isConnected, setIsConnected] = useState(socket.connected);
 
   const getGrupo = async () => {
     try {
@@ -63,6 +64,9 @@ const TelaConversaGrupo = () => {
   };
 
   useEffect(() => {
+    function onMsgEvent(data: any) {
+      setMensagensBox((previous) => [...previous, data]);
+    }
     socket.connect();
     getGrupo();
     getMensagens();
@@ -70,9 +74,12 @@ const TelaConversaGrupo = () => {
       nome: auth.user?.nome,
       grupo: Number(idConversa),
     });
-    socket.on("mensagem", (data) => {
-      console.log(data);
-    });
+    socket.on("mensagem", onMsgEvent);
+
+    return () => {
+      socket.off("mensagem", onMsgEvent);
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -84,7 +91,7 @@ const TelaConversaGrupo = () => {
       <div className="modal">
         {mensagensBox.map((value, index) => {
           return (
-            <div key={value.id + index} className="texto">
+            <div key={`${value.id} + ${index}`} className="texto">
               <ul key="mensagens">
                 <p className="user">{value.pessoa.nome}:</p>
                 <li key="mensagem">{value.mensagem}</li>
