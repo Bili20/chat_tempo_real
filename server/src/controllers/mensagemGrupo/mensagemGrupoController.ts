@@ -18,6 +18,20 @@ export class MensagemGrupoController {
       throw new Error(e);
     }
   }
+  static async testecreateMensagem(IMensagemGrupo: IMensagemGrupo) {
+    try {
+      const mensagem = await prismaClient.mensagem_grupo.create({
+        data: {
+          id_pessoa: IMensagemGrupo.idPessoa,
+          id_conversa: IMensagemGrupo.idConversa,
+          mensagem: IMensagemGrupo.mensagem,
+        },
+      });
+      return mensagem;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
 
   static async findMensagemUser(req: Request, res: Response) {
     const { idGrupo } = req.params;
