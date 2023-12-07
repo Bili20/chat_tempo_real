@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "./authContext";
 import { User } from "./type/user";
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 import { jwtDecode } from "jwt-decode";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
