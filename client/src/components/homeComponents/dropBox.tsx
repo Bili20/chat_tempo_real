@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
 import { pessoas } from "../../routes/home/home";
 import { useNavigate } from "react-router-dom";
-
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
 
 interface IProps {
@@ -68,7 +67,7 @@ const DropDown = (props: IProps) => {
             );
             return (
               <ul className="menu">
-                {filtro.length > 0 ? (
+                {filtro.length > 0 && auth.user?.id != user.id ? (
                   <li className="menu-item" key={user.id}>
                     <button onClick={() => postConversaPrivada(user.id)}>
                       {user.nome}
