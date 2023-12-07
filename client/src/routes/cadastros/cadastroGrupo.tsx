@@ -1,7 +1,7 @@
 import "./style/cadastroGrupo.css";
 import NavBar from "../../components/navbarComponents/navBar";
 import { useState } from "react";
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 
 type grupo = {
   nome: string;
