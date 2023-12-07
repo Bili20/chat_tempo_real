@@ -25,7 +25,6 @@ io.on("connection", (socket) => {
         socketId: socket.id,
       });
     }
-    console.log(users);
   });
 
   socket.on("mensagem", async (data) => {
