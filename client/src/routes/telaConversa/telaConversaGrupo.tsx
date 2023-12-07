@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import "./style/telaConversaGrupo.css";
 import NavBar from "../../components/navbarComponents/navBar";
 import { useParams } from "react-router-dom";
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
-import { io } from "socket.io-client";
+import { socket } from "../../config/socket";
 
 type grupo = {
   id: number;
@@ -51,20 +51,28 @@ const TelaConversaGrupo = () => {
 
   const enviaMensagem = async () => {
     try {
-      await webFetch
-        .post("/mensagem/grupo", {
-          mensagem: mensagem,
-          idConversa: Number(idConversa),
-          idPessoa: auth.user?.id,
-        })
-        .then(() => setMensagem(""));
+      socket.emit("mensagem", {
+        mensagem: mensagem,
+        idConversa: Number(idConversa),
+        idPessoa: auth.user?.id,
+      });
+      setMensagem("");
     } catch (e) {
       console.log(e);
     }
   };
+
   useEffect(() => {
+    socket.connect();
     getGrupo();
     getMensagens();
+    socket.emit("room", {
+      nome: auth.user?.nome,
+      grupo: Number(idConversa),
+    });
+    socket.on("mensagem", (data) => {
+      console.log(data);
+    });
   }, []);
 
   return (
