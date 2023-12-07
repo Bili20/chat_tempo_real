@@ -2,7 +2,7 @@ import NavBar from "../../components/navbarComponents/navBar";
 import { useState, useEffect, useContext } from "react";
 import "../../components/homeComponents/style/dropBox.css";
 import DropDown from "../../components/homeComponents/dropBox";
-import { webFetch } from "../../axios/axiosConfig";
+import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
 
 export type pessoas = {
