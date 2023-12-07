@@ -27,7 +27,22 @@ export class MensagemGrupoController {
           mensagem: IMensagemGrupo.mensagem,
         },
       });
-      return mensagem;
+      const mensagemData = await prismaClient.mensagem_grupo.findUnique({
+        where: { id: mensagem.id },
+        select: {
+          id: true,
+          data_cadastro: true,
+          id_conversa: true,
+          id_pessoa: true,
+          mensagem: true,
+          pessoa: {
+            select: {
+              nome: true,
+            },
+          },
+        },
+      });
+      return mensagemData;
     } catch (e) {
       throw new Error(e);
     }
