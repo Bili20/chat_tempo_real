@@ -31,38 +31,39 @@ const CadastroGrupo = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="cadastro-grupo"></div>
-      <h2>Cadastro de Grupo</h2>
-      <form onSubmit={criarGrupo}>
-        <div className="form-control">
-          <label htmlFor="nome">Nome:</label>
-          <input
-            type="text"
-            name="nome"
-            id="nome"
-            placeholder="Digite aqui"
-            value={grupo.nome}
-            onChange={(e) =>
-              setGrupo((old) => ({ ...old, nome: e.target.value }))
-            }
-          />
-        </div>
-        <div className="form-control">
-          <label htmlFor="descricao">descrição:</label>
-          <input
-            type="text"
-            name="descricao"
-            id="descricao"
-            placeholder="Digite aqui"
-            value={grupo.descricao}
-            onChange={(e) =>
-              setGrupo((old) => ({ ...old, descricao: e.target.value }))
-            }
-          />
-        </div>
-        <input type="submit" value="Criar" className="btn" />
-      </form>
+      <div className="container-cadastro-grupo">
+        <NavBar />
+        <h2 className="titulo-cadastro-grupo">Cadastro de Grupo</h2>
+        <form className="formulario-cadastro-grupo" onSubmit={criarGrupo}>
+          <div className="form-control">
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              name="nome"
+              id="nome"
+              placeholder="Digite aqui"
+              value={grupo.nome}
+              onChange={(e) =>
+                setGrupo((old) => ({ ...old, nome: e.target.value }))
+              }
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="descricao">descrição:</label>
+            <input
+              type="text"
+              name="descricao"
+              id="descricao"
+              placeholder="Digite aqui"
+              value={grupo.descricao}
+              onChange={(e) =>
+                setGrupo((old) => ({ ...old, descricao: e.target.value }))
+              }
+            />
+          </div>
+          <input type="submit" value="Criar" className="button-login" />
+        </form>
+      </div>
     </>
   );
 };
