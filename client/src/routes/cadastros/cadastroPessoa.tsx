@@ -68,84 +68,91 @@ const CadastroPessoa = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="cadastro-user">
-        <h2>Cadastro de Usuario:</h2>
-        <form onSubmit={criarUser}>
-          <div className="form-control">
-            <label htmlFor="nome">Nome:</label>
-            <input
-              type="text"
-              name="nome"
-              id="nome"
-              placeholder="Digite aqui"
-              value={user.nome}
-              onChange={(e) =>
-                setUser((old) => ({ ...old, nome: e.target.value }))
-              }
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Digite aqui"
-              value={user.email}
-              onChange={(e) =>
-                setUser((old) => ({ ...old, email: e.target.value }))
-              }
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="senha">Senha:</label>
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              placeholder="Digite aqui"
-              value={user.senha}
-              onChange={(e) =>
-                setUser((old) => ({ ...old, senha: e.target.value }))
-              }
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="cpf">Cpf:</label>
-            <input
-              type="number"
-              name="cpf"
-              id="cpf"
-              placeholder="Digite aqui"
-              value={user.cpf}
-              onChange={(e) =>
-                setUser((old) => ({ ...old, cpf: e.target.value }))
-              }
-            />
-          </div>
-          <div className="form-control">
-            <select
-              name="grupos"
-              id="grupos"
-              defaultValue={""}
-              value={selectedValue}
-              onChange={(e) => setSelectedValue(e.target.value)}
-            >
-              <option value="" disabled hidden>
-                Selecione um Grupo
-              </option>
-              {grupos.map((grupo) => (
-                <option key={grupo.id} value={grupo.id}>
-                  {grupo.nome}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button type="submit" className="btn">
-            Criar
-          </button>
-        </form>
+      <div className="container-cadastro-pessoa">
+        <NavBar />
+        <div className="cadastro-user">
+          <h2 className="titulo-cadastro-pessoa">Cadastro de Usuario:</h2>
+          <form className="formulario-cadastro-pessoa" onSubmit={criarUser}>
+            <div className="form-control">
+              <label htmlFor="nome">Nome:</label>
+              <input
+                type="text"
+                name="nome"
+                id="nome"
+                placeholder="Digite aqui"
+                value={user.nome}
+                onChange={(e) =>
+                  setUser((old) => ({ ...old, nome: e.target.value }))
+                }
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Digite aqui"
+                value={user.email}
+                onChange={(e) =>
+                  setUser((old) => ({ ...old, email: e.target.value }))
+                }
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="senha">Senha:</label>
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                placeholder="Digite aqui"
+                value={user.senha}
+                onChange={(e) =>
+                  setUser((old) => ({ ...old, senha: e.target.value }))
+                }
+              />
+            </div>
+            <div className="input-duplo">
+              <div className="box-input-cpf">
+                <label htmlFor="cpf">Cpf:</label>
+                <input
+                  className="input-cpf"
+                  type="number"
+                  name="cpf"
+                  id="cpf"
+                  placeholder="Digite aqui"
+                  value={user.cpf}
+                  onChange={(e) =>
+                    setUser((old) => ({ ...old, cpf: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="box-input-cpf">
+                <label htmlFor="grupo">Grupo:</label>
+                <select
+                  className="select-grupo"
+                  name="grupos"
+                  id="grupos"
+                  defaultValue={""}
+                  value={selectedValue}
+                  onChange={(e) => setSelectedValue(e.target.value)}
+                >
+                  <option value="" disabled hidden>
+                    Selecione
+                  </option>
+                  {grupos.map((grupo) => (
+                    <option key={grupo.id} value={grupo.id}>
+                      {grupo.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <button type="submit" className="button-login">
+              Criar
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
