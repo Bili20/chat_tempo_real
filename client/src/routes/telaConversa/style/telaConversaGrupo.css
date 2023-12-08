@@ -1,9 +1,17 @@
+.container-conversa {
+  background-color: #222222;
+  height: 100vh;
+}
+
 li {
   color: black;
 }
 
 .modal {
   background-color: azure;
+  max-height: 400px;
+  overflow-x: scroll;
+  width: 100%;
 }
 
 .user,
@@ -34,4 +42,10 @@ div .envia-mensagem {
 }
 #messages li:nth-child(odd) {
   background: #eee;
+}
+
+.container-conversa-modal {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
 }
