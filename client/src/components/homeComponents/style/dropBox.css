@@ -1,13 +1,12 @@
 .background-drop {
   width: 300px;
-  height: 100%;
-  background-color: grey;
+  background-color: #ffff;
   overflow-y: auto;
 }
 
 .nome-user {
   color: rgb(0, 0, 0);
-  background-color: rgb(148, 152, 207);
+  background-color: #ffff;
   font-weight: 300;
   font-size: 20px;
   text-align: center;
@@ -34,6 +33,6 @@
 }
 
 .menu-item button {
-  background-color: rgb(148, 152, 207);
+  background-color: #fff;
   text-align: left;
 }
