@@ -4,6 +4,7 @@ import "../../components/homeComponents/style/dropBox.css";
 import DropDown from "../../components/homeComponents/dropBox";
 import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
+import "./style/home.css";
 
 export type pessoas = {
   email: string;
@@ -61,18 +62,20 @@ const Home = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="background-drop">
-        <h1 className="nome-user">Olá {auth.user?.nome}</h1>
-        {grupos.map((grupo) => (
-          <div className="grupos" key={grupo.id}>
-            <DropDown
-              grupoNome={grupo.nome}
-              users={pessoas}
-              idGrupo={grupo.id}
-            />
-          </div>
-        ))}
+      <div className="container-home">
+        <NavBar />
+        <div className="background-drop">
+          <h1 className="nome-user">Olá {auth.user?.nome}</h1>
+          {grupos.map((grupo) => (
+            <div className="grupos" key={grupo.id}>
+              <DropDown
+                grupoNome={grupo.nome}
+                users={pessoas}
+                idGrupo={grupo.id}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
