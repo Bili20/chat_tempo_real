@@ -18,7 +18,7 @@ export class MensagemGrupoController {
       throw new Error(e);
     }
   }
-  static async testecreateMensagem(IMensagemGrupo: IMensagemGrupo) {
+  static async testecreateMensagemGrupo(IMensagemGrupo: IMensagemGrupo) {
     try {
       const mensagem = await prismaClient.mensagem_grupo.create({
         data: {
