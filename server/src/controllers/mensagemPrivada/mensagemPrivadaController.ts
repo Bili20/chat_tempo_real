@@ -81,6 +81,7 @@ export class MensagemPrivadaController {
             },
           },
         },
+        orderBy: { id: "asc" },
       });
       res.status(200).json(mensagem);
     } catch (e) {
