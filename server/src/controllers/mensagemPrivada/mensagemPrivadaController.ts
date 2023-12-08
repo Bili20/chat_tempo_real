@@ -19,6 +19,36 @@ export class MensagemPrivadaController {
     }
   }
 
+  static async testecreateMensagemPrivada(IMensagem: IMensagemPrivada) {
+    try {
+      const mensagem = await prismaClient.mensagem_privada.create({
+        data: {
+          mensagem: IMensagem.mensagem,
+          id_conversa: IMensagem.idConversa,
+          id_pessoa: IMensagem.idPessoa,
+        },
+      });
+      const mensagemData = await prismaClient.mensagem_privada.findUnique({
+        where: { id: mensagem.id },
+        select: {
+          id: true,
+          data_cadastro: true,
+          id_conversa: true,
+          id_pessoa: true,
+          mensagem: true,
+          pessoa: {
+            select: {
+              nome: true,
+            },
+          },
+        },
+      });
+      return mensagemData;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
   static async findMensagemUser(req: Request, res: Response) {
     const { idEmissor, idReceptor } = req.params;
     try {
