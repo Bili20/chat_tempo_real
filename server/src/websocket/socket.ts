@@ -38,11 +38,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("mensagemGrupo", async (data) => {
-    const mensagem = await MensagemGrupoController.testecreateMensagemGrupo(
-      data
-    );
+    const str = data.mensagem.replace(/\s/g, "");
+    if (str.length > 0) {
+      const mensagem = await MensagemGrupoController.testecreateMensagemGrupo(
+        data
+      );
 
-    io.to(data.idConversa).emit("mensagemGrupo", mensagem);
+      io.to(data.idConversa).emit("mensagemGrupo", mensagem);
+    }
   });
 
   socket.on("userReceptor", (data) => {
@@ -62,18 +65,18 @@ io.on("connection", (socket) => {
   });
 
   socket.on("mensagemPrivada", async (data) => {
-    const mensagem = await MensagemPrivadaController.testecreateMensagemPrivada(
-      {
-        idConversa: data.idConversa,
-        idPessoa: data.idPessoa,
-        mensagem: data.mensagem,
-      }
-    );
+    const str = data.mensagem.replace(/\s/g, "");
+    if (str.length > 0) {
+      const mensagem =
+        await MensagemPrivadaController.testecreateMensagemPrivada({
+          idConversa: data.idConversa,
+          idPessoa: data.idPessoa,
+          mensagem: data.mensagem,
+        });
 
-    io.to([data.idConversa]).emit("mensagemPrivada", mensagem);
+      io.to([data.idConversa]).emit("mensagemPrivada", mensagem);
+    }
   });
 
-  socket.on("disconnect", () => {
-    console.log("Usuario desconectado", socket.id);
-  });
+  socket.on("disconnect", () => {});
 });
