@@ -46,22 +46,37 @@ const TelaConversaPrivada = () => {
 
   const enviaMensagem = async () => {
     try {
-      await webFetch
-        .post("/mensagem/privada", {
-          mensagem: mensagem,
-          idConversa: Number(idConversa),
-          idPessoa: auth.user?.id,
-        })
-        .then(() => setMensagem(""));
+      socket.emit("mensagemPrivada", {
+        mensagem: mensagem,
+        idConversa: Number(idConversa),
+        idPessoa: auth.user?.id,
+        idReceptor: Number(idReceptor),
+      });
+      setMensagem("");
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
+    function onMsgEvent(data: any) {
+      setMensagensBox((previous) => [...previous, data]);
+    }
     socket.connect();
     getMensagens();
     getUser();
+    socket.emit("userReceptor", {
+      idUser: auth.user?.id,
+      idReceptor: Number(idReceptor),
+      idConversa: Number(idConversa),
+    });
+
+    socket.on("mensagemPrivada", onMsgEvent);
+
+    return () => {
+      socket.off("mensagemPrivada", onMsgEvent);
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -75,7 +90,7 @@ const TelaConversaPrivada = () => {
           return (
             <div key={value.id + index} className="texto">
               <ul key="mensagens">
-                <p className="user">{value.pessoa.nome}</p>
+                <p className="user">{value.pessoa.nome}:</p>
                 <li key="mensagem">{value.mensagem}</li>
               </ul>
             </div>
