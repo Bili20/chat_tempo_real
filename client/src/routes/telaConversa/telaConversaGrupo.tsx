@@ -29,7 +29,6 @@ const TelaConversaGrupo = () => {
   const { idGrupo, idConversa } = useParams();
   const [mensagem, setMensagem] = useState<string>("");
   const auth = useContext(AuthContext);
-  const [isConnected, setIsConnected] = useState(socket.connected);
 
   const getGrupo = async () => {
     try {
@@ -52,7 +51,7 @@ const TelaConversaGrupo = () => {
 
   const enviaMensagem = async () => {
     try {
-      socket.emit("mensagem", {
+      socket.emit("mensagemGrupo", {
         mensagem: mensagem,
         idConversa: Number(idConversa),
         idPessoa: auth.user?.id,
@@ -71,13 +70,13 @@ const TelaConversaGrupo = () => {
     getGrupo();
     getMensagens();
     socket.emit("room", {
-      nome: auth.user?.nome,
+      idUser: auth.user?.id,
       grupo: Number(idConversa),
     });
-    socket.on("mensagem", onMsgEvent);
+    socket.on("mensagemGrupo", onMsgEvent);
 
     return () => {
-      socket.off("mensagem", onMsgEvent);
+      socket.off("mensagemGrupo", onMsgEvent);
       socket.disconnect();
     };
   }, []);
