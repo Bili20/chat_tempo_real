@@ -17,23 +17,19 @@ const NavBar = () => {
       <h2>
         <Link to={`/`}>Wave</Link>
       </h2>
-      <ul>
-        <li>
-          <Link to={"/cadastro/grupo"} className="btn">
-            Cadastro de Grupo
-          </Link>
-        </li>
-        <li>
-          <Link to={"/cadastro/user"} className="btn">
-            Cadastro de Usuario
-          </Link>
-        </li>
-        <li>
-          <button onClick={deslogar} className="btn">
-            Sair
-          </button>
-        </li>
-      </ul>
+      <div className="container-navbar">
+        <Link to={"/cadastro/grupo"} className="button-navbar">
+          Cadastro de Grupo
+        </Link>
+
+        <Link to={"/cadastro/user"} className="button-navbar">
+          Cadastro de Usuario
+        </Link>
+
+        <button onClick={deslogar} className="button-sair">
+          Sair
+        </button>
+      </div>
     </nav>
   );
 };
