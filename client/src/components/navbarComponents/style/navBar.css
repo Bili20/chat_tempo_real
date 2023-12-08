@@ -17,3 +17,22 @@
   display: flex;
   gap: 1rem;
 }
+
+.button-navbar {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.button-sair {
+  border: none;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+}
+
+.container-navbar {
+  display: flex;
+  gap: 10px;
+}
