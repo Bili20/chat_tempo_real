@@ -1,10 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import "./style/telaConversaGrupo.css";
+import "./style/telaConversa.css";
 import NavBar from "../../components/navbarComponents/navBar";
 import { useParams } from "react-router-dom";
 import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
 import { socket } from "../../config/socket";
+import { format } from "date-fns";
 
 type grupo = {
   id: number;
@@ -15,9 +16,9 @@ type grupo = {
 type mensagens = {
   id: number;
   mensagem: string;
-  dataCadastro: Date;
+  data_cadastro: Date;
   idConversa: number;
-  idPessoa: number;
+  id_pessoa: number;
   pessoa: {
     nome: string;
   };
@@ -63,6 +64,12 @@ const TelaConversaGrupo = () => {
     }
   };
 
+  const formatData = (data: Date) => {
+    const newData = format(new Date(data), "dd-MM-yyyy HH:mm");
+    console.log(newData);
+    return newData;
+  };
+
   useEffect(() => {
     function onMsgEvent(data: any) {
       setMensagensBox((previous) => [...previous, data]);
@@ -98,22 +105,39 @@ const TelaConversaGrupo = () => {
         <NavBar />
         <div className="titulo">
           <h2>{grupo?.nome}</h2>
+          <p>{grupo?.descricao}</p>
         </div>
         <div className="container-conversa-modal">
           <div className="modal" ref={refConversation}>
             {mensagensBox.map((value, index) => {
               return (
-                <div key={`${value.id} + ${index}`} className="texto">
-                  <ul key="mensagens">
-                    <p className="user">{value.pessoa.nome}:</p>
-                    <li key="mensagem">{value.mensagem}</li>
-                  </ul>
+                <div
+                  className={
+                    value.id_pessoa === auth.user?.id
+                      ? "texto-user-container"
+                      : "texto-container"
+                  }
+                >
+                  <div
+                    key={`${value.id} + ${index}`}
+                    className={
+                      value.id_pessoa === auth.user?.id ? "texto-user" : "texto"
+                    }
+                  >
+                    <ul key="mensagens">
+                      <p className="user">{value.pessoa.nome}:</p>
+                      <li key="mensagem" className="mensagem">
+                        {value.mensagem}
+                      </li>
+                    </ul>
+                    <p className="data">{formatData(value.data_cadastro)}</p>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          <div>
+          <div className="input-button">
             <input
               onChange={(e) => setMensagem(e.target.value)}
               value={mensagem}
