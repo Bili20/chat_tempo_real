@@ -66,7 +66,6 @@ const TelaConversaGrupo = () => {
 
   const formatData = (data: Date) => {
     const newData = format(new Date(data), "dd-MM-yyyy HH:mm");
-    console.log(newData);
     return newData;
   };
 
