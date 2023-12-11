@@ -6,20 +6,27 @@
 li {
   color: black;
 }
-
+.container-conversa-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .modal {
   background-color: azure;
   max-height: 400px;
   height: 400px;
-  overflow-x: scroll;
   width: 50%;
   max-width: 50%;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 20em;
-  overflow-x: hidden;
   border-radius: 5px;
+  position: relative;
+}
+
+.conversa-dentro {
+  height: 90%;
+  overflow-x: hidden;
 }
 
 .data {
@@ -27,15 +34,21 @@ li {
 }
 
 .input-button {
-  position: absolute;
-  left: 20em;
-  top: 34em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 5px;
+  height: 10%;
 }
+
 .input-button input {
-  width: 600px;
+  background-color: #222222;
+  color: white;
+  width: 100%;
   margin-right: 10px;
 }
 .input-button button {
+  margin-right: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
