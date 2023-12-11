@@ -21,8 +21,8 @@ const Login = () => {
       await auth
         .signIn(payload.email, payload.senha)
         .then()
-        .catch(() => {
-          alert("email ou senha incorreto");
+        .catch((e) => {
+          alert(e.response.data.message);
         });
     }
   };
