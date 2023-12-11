@@ -64,6 +64,7 @@ const Home = () => {
     <>
       <div className="container-home">
         <NavBar />
+
         <div className="background-drop">
           <h1 className="nome-user">Olá {auth.user?.nome}</h1>
           {grupos.map((grupo) => (
@@ -75,6 +76,9 @@ const Home = () => {
               />
             </div>
           ))}
+        </div>
+        <div className="img-logo-container">
+          <img src="../../../img/userLogo.png" alt="" />
         </div>
       </div>
     </>
