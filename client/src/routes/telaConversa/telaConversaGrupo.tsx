@@ -107,46 +107,49 @@ const TelaConversaGrupo = () => {
           <p>{grupo?.descricao}</p>
         </div>
         <div className="container-conversa-modal">
-          <div className="modal" ref={refConversation}>
-            {mensagensBox.map((value, index) => {
-              return (
-                <div
-                  className={
-                    value.id_pessoa === auth.user?.id
-                      ? "texto-user-container"
-                      : "texto-container"
-                  }
-                >
+          <div className="modal">
+            <div className="conversa-dentro" ref={refConversation}>
+              {mensagensBox.map((value, index) => {
+                return (
                   <div
-                    key={`${value.id} + ${index}`}
                     className={
-                      value.id_pessoa === auth.user?.id ? "texto-user" : "texto"
+                      value.id_pessoa === auth.user?.id
+                        ? "texto-user-container"
+                        : "texto-container"
                     }
                   >
-                    <ul key="mensagens">
-                      <p className="user">{value.pessoa.nome}:</p>
-                      <li key="mensagem" className="mensagem">
-                        {value.mensagem}
-                      </li>
-                    </ul>
-                    <p className="data">{formatData(value.data_cadastro)}</p>
+                    <div
+                      key={`${value.id} + ${index}`}
+                      className={
+                        value.id_pessoa === auth.user?.id
+                          ? "texto-user"
+                          : "texto"
+                      }
+                    >
+                      <ul key="mensagens">
+                        <p className="user">{value.pessoa.nome}:</p>
+                        <li key="mensagem" className="mensagem">
+                          {value.mensagem}
+                        </li>
+                      </ul>
+                      <p className="data">{formatData(value.data_cadastro)}</p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="input-button">
-            <input
-              onChange={(e) => setMensagem(e.target.value)}
-              value={mensagem}
-              className="caixa-digito"
-              type="text"
-              placeholder="Digite aqui"
-            />
-            <button onClick={enviaMensagem} className="envia-mensagem">
-              enviar
-            </button>
+                );
+              })}
+            </div>
+            <div className="input-button">
+              <input
+                onChange={(e) => setMensagem(e.target.value)}
+                value={mensagem}
+                className="caixa-digito"
+                type="text"
+                placeholder="Digite aqui"
+              />
+              <button onClick={enviaMensagem} className="envia-mensagem">
+                enviar
+              </button>
+            </div>
           </div>
         </div>
       </div>
