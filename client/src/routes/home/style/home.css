@@ -28,3 +28,6 @@
   width: auto;
   height: 70%;
 }
+.nome-user::first-letter {
+  text-transform: uppercase;
+}
