@@ -18,11 +18,12 @@ const Login = () => {
   const logar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (payload.email && payload.senha) {
-      const isLogged = await auth.signIn(payload.email, payload.senha);
-
-      if (!isLogged) {
-        alert("email ou senha incorreto");
-      }
+      await auth
+        .signIn(payload.email, payload.senha)
+        .then()
+        .catch(() => {
+          alert("email ou senha incorreto");
+        });
     }
   };
 
