@@ -12,6 +12,9 @@ export class AuthController {
     const { email, senha } = req.body;
     try {
       const verificaEmail = await PessoaController.findPessoaPorEmail(email);
+      if (!verificaEmail) {
+        res.status(401).json({ message: "Email ou senha incorreto" });
+      }
 
       if (verificaEmail) {
         const verificaSenha = bcrypt.compareSync(senha, verificaEmail.senha);
@@ -29,7 +32,7 @@ export class AuthController {
         }
       }
     } catch (e) {
-      throw e;
+      throw new Error(e);
     }
   }
 
