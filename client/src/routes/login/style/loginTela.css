@@ -62,7 +62,25 @@
 }
 
 .button-login:hover {
-  padding: 15px 33px 15px 33px;
   background-color: #ffffff;
   color: #000000;
+}
+
+.form-control-login {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 500px;
+  color: white;
+}
+
+.form-control-login label {
+  margin-bottom: 0.5rem;
+}
+
+.form-control-login input,
+.form-control-login textarea,
+.form-control-login select {
+  padding: 15px 15px 15px 10px;
+  border-radius: 10px;
 }
