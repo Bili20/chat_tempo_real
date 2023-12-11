@@ -17,11 +17,13 @@
   width: 100%;
   padding: 0.5rem;
   border: none;
+  cursor: pointer;
 }
 
 .btn-grupos {
   display: flex;
 }
+
 .conversa {
   background-color: blueviolet;
 }
@@ -33,6 +35,13 @@
 }
 
 .menu-item button {
-  background-color: #fff;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   text-align: left;
+  transition: 0.3s;
+}
+
+.menu-item:hover button {
+  color: rgb(255, 255, 255);
+  background-color: rgb(54, 54, 54);
 }
