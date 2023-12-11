@@ -60,24 +60,26 @@ const DropDown = (props: IProps) => {
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
-      {open
-        ? props.users.map((user) => {
-            const filtro = user.grupos_pessoas.filter(
-              (item) => item.grupo.id === props.idGrupo
-            );
-            return (
-              <ul className="menu">
-                {filtro.length > 0 && auth.user?.id != user.id ? (
-                  <li className="menu-item" key={user.id}>
-                    <button onClick={() => postConversaPrivada(user.id)}>
-                      {user.nome}
-                    </button>
-                  </li>
-                ) : null}
-              </ul>
-            );
-          })
-        : null}
+      <ul className="menu">
+        {open
+          ? props.users.map((user) => {
+              const filtro = user.grupos_pessoas.filter(
+                (item) => item.grupo.id === props.idGrupo
+              );
+              return (
+                <>
+                  {filtro.length > 0 && auth.user?.id != user.id ? (
+                    <li className="menu-item" key={user.id}>
+                      <button onClick={() => postConversaPrivada(user.id)}>
+                        {user.nome}
+                      </button>
+                    </li>
+                  ) : null}
+                </>
+              );
+            })
+          : null}
+      </ul>
     </>
   );
 };
