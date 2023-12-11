@@ -20,9 +20,14 @@ const CadastroGrupo = () => {
     e.preventDefault();
 
     try {
-      await webFetch.post("/grupo", {
-        ...grupo,
-      });
+      await webFetch
+        .post("/grupo", {
+          ...grupo,
+        })
+        .then()
+        .catch((e) => {
+          alert(e.response.data.message);
+        });
       setGrupo(INIT_ALL_GRUPO);
     } catch (e) {
       console.error(e);
