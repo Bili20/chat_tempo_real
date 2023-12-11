@@ -6,8 +6,10 @@
 
 .background-drop {
   background-color: aliceblue;
-  height: 100%;
+  height: 90%;
   min-width: 15%;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .container-main {
