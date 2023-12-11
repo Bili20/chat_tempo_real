@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,246" last-zoom="0.85" max-obj-count="9"
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,114" last-zoom="0.85" max-obj-count="9"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -42,6 +42,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 	<constraint name="pessoa_pk" type="pk-constr" table="public.pessoa">
 		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="email_uq" type="uq-constr" table="public.pessoa">
+		<columns names="email" ref-type="src-columns"/>
 	</constraint>
 </table>
 
