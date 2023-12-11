@@ -64,7 +64,7 @@ model mensagem_privada {
 model pessoa {
   id               Int                @id(map: "pessoa_pk") @default(autoincrement())
   nome             String             @default(dbgenerated("200")) @db.VarChar
-  email            String             @default(dbgenerated("255")) @db.VarChar
+  email            String             @unique(map: "email_uq") @default(dbgenerated("255")) @db.VarChar
   senha            String             @db.VarChar
   cpf              String             @unique(map: "cpf_uq") @default(dbgenerated("11")) @db.VarChar
   data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
