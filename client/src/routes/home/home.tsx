@@ -64,21 +64,22 @@ const Home = () => {
     <>
       <div className="container-home">
         <NavBar />
-
-        <div className="background-drop">
-          <h1 className="nome-user">Olá {auth.user?.nome}</h1>
-          {grupos.map((grupo) => (
-            <div className="grupos" key={grupo.id}>
-              <DropDown
-                grupoNome={grupo.nome}
-                users={pessoas}
-                idGrupo={grupo.id}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="img-logo-container">
-          <img src="../../../img/userLogo.png" alt="" />
+        <div className="container-main">
+          <div className="background-drop">
+            <h1 className="nome-user">Olá {auth.user?.nome}</h1>
+            {grupos.map((grupo) => (
+              <div className="grupos" key={grupo.id}>
+                <DropDown
+                  grupoNome={grupo.nome}
+                  users={pessoas}
+                  idGrupo={grupo.id}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="img-logo-container">
+            <img src="../../../img/userLogo.png" alt="" className="img-logo" />
+          </div>
         </div>
       </div>
     </>
