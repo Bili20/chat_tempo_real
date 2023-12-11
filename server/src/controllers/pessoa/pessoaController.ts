@@ -17,6 +17,13 @@ export class PessoaController {
       if (cpf.length < 11 || cpf.length > 11) {
         throw new Error("Cpf invalido");
       }
+
+      if (IPessoaCadastro.nome.length < 1) {
+        throw new Error("Informe um nome");
+      }
+      if (IPessoaCadastro.senha.length < 4) {
+        throw new Error("Informe uma senha, minimo 4 caracteres");
+      }
       IPessoaCadastro.senha = await bcrypt.hash(IPessoaCadastro.senha, 10);
       const pessoa = await prismaClient.pessoa.create({
         data: IPessoaCadastro,
