@@ -13,7 +13,8 @@ export class PessoaController {
       if (!emailValido) {
         throw new Error("Email invalido");
       }
-      if (IPessoaCadastro.cpf.length < 11 || IPessoaCadastro.cpf.length > 11) {
+      const cpf = IPessoaCadastro.cpf.replace(/[^0-9]/g, "");
+      if (cpf.length < 11 || cpf.length > 11) {
         throw new Error("Cpf invalido");
       }
       IPessoaCadastro.senha = await bcrypt.hash(IPessoaCadastro.senha, 10);
