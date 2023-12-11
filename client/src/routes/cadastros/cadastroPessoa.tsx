@@ -30,16 +30,17 @@ const CadastroPessoa = () => {
 
   const criarUser = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const usuario = await webFetch.post("/pessoa", {
+    await webFetch
+      .post("/pessoa", {
         ...user,
+      })
+      .then((user) => {
+        adicionaGrupo(user.data.id, Number(selectedValue));
+        setUser(INIT_ALL_USER);
+      })
+      .catch((e) => {
+        alert(e.response.data.message);
       });
-      setUser(INIT_ALL_USER);
-      adicionaGrupo(usuario.data.id, Number(selectedValue));
-    } catch (e) {
-      console.error(e);
-    }
   };
 
   const adicionaGrupo = async (idUser: number, idGrupo: number) => {
