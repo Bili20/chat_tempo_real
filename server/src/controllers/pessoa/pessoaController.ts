@@ -67,7 +67,7 @@ export class PessoaController {
     res.status(200).json(pessoa);
   }
 
-  static async findPessoaPorEmail(email: string): Promise<IPessoa | undefined> {
+  static async findPessoaPorEmail(email: string): Promise<any> {
     const pessoa = await prismaClient.pessoa.findFirst({
       where: { email: email },
     });
@@ -80,7 +80,7 @@ export class PessoaController {
       newPessoa.nome = pessoa.nome;
       return newPessoa;
     } else {
-      return;
+      return false;
     }
   }
 
