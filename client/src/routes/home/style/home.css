@@ -10,6 +10,7 @@
   min-width: 15%;
   max-height: 100%;
   overflow: auto;
+  border-radius: 0px 0px 10px 10px;
 }
 
 .container-main {
