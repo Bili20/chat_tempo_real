@@ -53,7 +53,7 @@ const DropDown = (props: IProps) => {
   return (
     <>
       <div className="btn-grupos">
-        <button onClick={() => setOpen((old) => !old)}>
+        <button className="nome-grupo" onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
         <button className="conversa" onClick={postConversaGrupo}>
@@ -70,7 +70,10 @@ const DropDown = (props: IProps) => {
                 <>
                   {filtro.length > 0 && auth.user?.id != user.id ? (
                     <li className="menu-item" key={user.id}>
-                      <button onClick={() => postConversaPrivada(user.id)}>
+                      <button
+                        className="menu-nome-user"
+                        onClick={() => postConversaPrivada(user.id)}
+                      >
                         {user.nome}
                       </button>
                     </li>
