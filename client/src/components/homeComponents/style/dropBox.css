@@ -1,7 +1,6 @@
 .background-drop {
   width: 300px;
   background-color: #ffff;
-  overflow-y: auto;
 }
 
 .nome-user {
@@ -44,4 +43,9 @@
 .menu-item:hover button {
   color: rgb(255, 255, 255);
   background-color: rgb(54, 54, 54);
+}
+
+.menu {
+  max-height: 100px;
+  overflow: auto;
 }
