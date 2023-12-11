@@ -37,7 +37,7 @@ const Login = () => {
           <img className="user-name" src="../../../img/username.png" alt="" />
         </div>
         <form onSubmit={logar}>
-          <div className="form-control">
+          <div className="form-control-login">
             <label htmlFor="email">Email:</label>
             <input
               className="input-login"
@@ -52,7 +52,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="form-control">
+          <div className="form-control-login">
             <label htmlFor="senha">Senha:</label>
             <input
               className="input-login"
