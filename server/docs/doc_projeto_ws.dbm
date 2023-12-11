@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,497" last-zoom="1.05" max-obj-count="9"
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,246" last-zoom="0.85" max-obj-count="9"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -146,7 +146,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#6ed102"
 	 src-table="public.pessoa"
 	 dst-table="public.conversa"
-	 src-required="true" dst-required="false"/>
+	 src-required="true" dst-required="false">
+	<label ref-type="name-label">
+		<position x="2.57285" y="0.908736"/>
+	</label>
+</relationship>
 
 <relationship name="grupo_has_many_conversa" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
