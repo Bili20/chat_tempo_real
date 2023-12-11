@@ -43,6 +43,9 @@ export class GrupoController {
     let IGrupoCadastro: IGrupoCadastro = req.body;
 
     try {
+      if (IGrupoCadastro.nome.length < 1) {
+        throw new Error("De um nome valido");
+      }
       await prismaClient.grupo.create({ data: IGrupoCadastro });
       res.status(201).json();
     } catch (e) {
