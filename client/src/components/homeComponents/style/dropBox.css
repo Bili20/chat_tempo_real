@@ -22,6 +22,15 @@
 .btn-grupos {
   display: flex;
 }
+.nome-grupo {
+  color: white;
+}
+.nome-grupo::first-letter {
+  text-transform: uppercase;
+}
+.menu-nome-user::first-letter {
+  text-transform: uppercase;
+}
 
 .conversa {
   background-color: blueviolet;
