@@ -1,4 +1,17 @@
 .container-home {
   background-color: #222222;
   height: 100vh;
+  overflow-y: hidden;
+}
+
+.background-drop {
+  background-color: aliceblue;
+  height: 100%;
+}
+
+.img-logo-container {
+  position: absolute;
+  top: 6em;
+  left: 35em;
+  opacity: 25%;
 }
