@@ -6,6 +6,8 @@ Este é um projeto de estudo para um sistema de chat em tempo real. Ele foi dese
 
 - Comunicação em tempo real com **WebSockets**.
 - Gerenciamento de mensagens e usuários.
+- Autenticação de usuarios.
+- Chat em grupo e individual.
 - Persistência de dados em banco de dados relacional (**PostgreSQL**).
 - Estrutura modular e escrita em **TypeScript**.
 
@@ -34,5 +36,3 @@ Este é um projeto de estudo para um sistema de chat em tempo real. Ele foi dese
 - [PostgreSQL](https://www.postgresql.org/) (se preferir executar o banco de dados localmente, sem Docker)
 - [Prisma](https://www.prisma.io/docs/getting-started?_gl=1*pwp6cj*_up*MQ..*_gs*MQ..)
 - [Vite](https://vite.dev/guide/)
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
