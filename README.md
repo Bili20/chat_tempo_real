@@ -1,6 +1,6 @@
 # Chat em Tempo Real
 
-Este é um projeto de estudo para um sistema de chat em tempo real. Ele foi desenvolvido com **Node.js**, **TypeScript**, **Express**, e **Socket.IO** no backend, utilizando **PostgreSQL** como banco de dados e ORM **Prisma**. A aplicação também utiliza o **Docker** para gerenciar o banco de dados.
+Este é um projeto de estudo para um sistema de chat em tempo real. Ele foi desenvolvido com **Node.js**, **TypeScript**, **Express**, e **Socket.IO** no Backend, utilizando **PostgreSQL** como banco de dados e ORM **Prisma**. A aplicação também utiliza o **Docker** para gerenciar o banco de dados No Frontend a utilização de Vite React e Socket.IO.
 
 ## Funcionalidades
 
